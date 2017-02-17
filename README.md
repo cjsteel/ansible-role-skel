@@ -42,6 +42,18 @@ None
           state: directory
 ```
 
+## Example as Dependancy
+
+```yaml
+---
+# file: roles/shorewall/meta/main.yml
+dependencies:
+  - { role: skel, 
+       skel_entries:
+        - path: /etc/skel/.ssh,
+          state: directory
+    }
+```
 ## License
 
 MIT / BSD
