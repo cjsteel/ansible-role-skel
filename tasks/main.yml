@@ -9,7 +9,7 @@
     owner: "{{ item.owner | default(skel_default_owner) }}"
     group: "{{ item.group | default(skel_default_group) }}"
     mode: "{{ item.mode | default(skel_default_directory_mode) }}"
-  when: item.state is defined and item.state == 'directory'
+  when: item.state is defined and item.state == 'directory' or item.state is defined and item.state =='absent'
   with_flattened:
     - "{{ skel_entries }}"
     - "{{ skel_group_entries }}"
