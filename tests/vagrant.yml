@@ -1,0 +1,23 @@
+# test file for bash
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  roles:
+    - ../../
+  vars:
+    - skel_entries:
+      - path: "/etc/skel/.ssh"
+        mode: "0700"
+        state: "directory"
+      - path: "/etc/skel/passwd"
+        src: "/etc/passwd"
+        state: "link"
+      - path: "/etc/skel/foo"
+        src: "./files/foo"
+        state: "copy"
+      - path: "/etc/skel/bar"
+        src: "./templates/bar.j2"
+        state: "template"
+
+
