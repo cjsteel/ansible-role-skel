@@ -5,17 +5,32 @@
   vars:
     - skel_entries:
       - path: "/etc/skel/.ssh"
-        mode: "0700"
         state: "directory"
+        owner: "{{ item.owner | default(skel_default_owner) }}"
+        group: "{{ item.group | default(skel_default_group) }}"
+        mode: "0700"
       - path: "/etc/skel/passwd"
-        src: "/etc/passwd"
         state: "link"
+        src: "/etc/passwd"
+        owner: "{{ item.owner | default(skel_default_owner) }}"
+        group: "{{ item.group | default(skel_default_group) }}"
+        mode: "0700"
+        force: "{{ item.force | default(skel_default_link_force) }}"
       - path: "/etc/skel/foo"
+        state: "copy" 
         src: "./files/foo"
-        state: "copy"
-      - path: "/etc/skel/bar"
-        src: "./templates/bar.j2"
-        state: "template"
+        dest: "{{ item.path }}"
+        owner: "{{ item.owner | default(skel_default_owner) }}"
+        group: "{{ item.group | default(skel_default_group) }}"
+        mode: "0755"
+# Template(s) 
+     - path: "/etc/skel/bar"
+       state: 'template'
+       src: "./templates/bar.j2"
+       dest: "{{ item.path }}"
+       owner: "{{ item.owner | default(skel_default_owner) }}"
+       group: "{{ item.group | default(skel_default_group) }}"
+       mode: "0755"
 
   roles:
     - ansible-role-skel

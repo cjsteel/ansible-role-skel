@@ -33,6 +33,7 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+## COPY
 
 - name: 'Manage skels files to copy'
   copy:
