@@ -2,6 +2,8 @@
 
 # Main tasks file for skel role
 
+# directories
+
 - name: 'Manage skels directories'
   file:
     path: "{{ item.path }}"
@@ -16,6 +18,7 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+# sym links
 
 - name: 'Manage skels links'
   file:
@@ -33,7 +36,7 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
-## COPY
+## copies
 
 - name: 'Manage skels files to copy'
   copy:
@@ -49,6 +52,7 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+## templates
 
 - name: 'Manage skels files to template'
   template:
@@ -63,3 +67,5 @@
     - "{{ skel_group_entries }}"
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
+
+
