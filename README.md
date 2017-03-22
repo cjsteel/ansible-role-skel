@@ -6,7 +6,7 @@ Manage unix `skeleton`.
 
 ## Requirements
 
-None
+tNone
 
 ## Role Variables
 
@@ -16,11 +16,11 @@ For a complete list of variables, see `default/main.yml`.
     skel_default_group: 'root'
     skel_default_directory_mode: '0750'
     skel_default_file_mode: '0640'
-
+    
     skel_default_link_force: False
     skel_default_link_mode: '0640'
     skel_default_link_state: 'link'
-
+    
     skel_entries: []
     skel_group_entries: []
     skel_host_entries: []
@@ -54,6 +54,28 @@ dependencies:
           state: directory
     }
 ```
+## Testing
+
+### Vagrant
+
+#### enable ansible env if using
+
+```shell
+source activate ansible
+```
+
+#### Create synced directory
+
+```shell
+mkdir -p .vagrant/synced
+```
+
+#### vagrant up
+
+```shell
+vagrant up
+```
+
 ## License
 
 MIT / BSD

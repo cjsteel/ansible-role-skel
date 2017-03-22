@@ -4,7 +4,9 @@
 
   vars:
     - skel_entries:
+
 ## directory test
+
       - path: "/etc/skel/.ssh"
         state: "directory"
         owner: "{{ item.owner | default(skel_default_owner) }}"
@@ -12,6 +14,7 @@
         mode: "0700"
 
 ## link test
+
       - path: "/etc/skel/passwd"
         state: "link"
         src: "/etc/passwd"
@@ -19,7 +22,9 @@
         group: "{{ item.group | default(skel_default_group) }}"
         mode: "0700"
         force: "{{ item.force | default(skel_default_link_force) }}"
+
 ## copy test
+
       - path: "/etc/skel/foo"
         state: "copy" 
         src: "./files/foo"
@@ -27,7 +32,9 @@
         owner: "{{ item.owner | default(skel_default_owner) }}"
         group: "{{ item.group | default(skel_default_group) }}"
         mode: "0755"
+
 ## template test
+
      - path: "/etc/skel/bar"
        state: 'template'
        src: "./templates/bar.j2"
