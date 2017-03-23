@@ -11,6 +11,11 @@ skel_default_link_force: False
 skel_default_link_mode: '0640'
 skel_default_link_state: 'link'
 
+# blocinfile
+
+skel_default_blockinfile_marker: '<!-- {mark} ANSIBLE MANAGED BLOCK -->'
+skel_default_blockinfile_insertafter: "EOF" # or *regedit*, "<body>"
+
 skel_entries: []
 skel_group_entries: []
 skel_host_entries: []
