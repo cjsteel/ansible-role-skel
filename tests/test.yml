@@ -43,5 +43,22 @@
        group: "{{ item.group | default(skel_default_group) }}"
        mode: "0755"
 
+## block in file test
+
+      - type: 'blockinfile'    
+        path: "/etc/skel/.bashrc"
+        insertafter: "EOF"
+        block: |
+          # if running bash
+          if [ -n "$BASH_VERSION" ]; then
+              # include /opt/display/bin/display if it exists
+              if [ -f "/opt/display/bin/display" ]; then
+                  PATH="/opt/display/bin:$PATH"
+
+          	. "/opt/display/bin/"
+              fi
+          fi
+        state: "present"
+
   roles:
     - ansible-role-skel

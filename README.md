@@ -52,7 +52,25 @@ dependencies:
        skel_entries:
         - path: /etc/skel/.ssh,
           state: directory
+
+        - type: 'blockinfile'    
+          path: "/etc/skel/.bashrc"
+          insertafter: "EOF"
+          block: |
+            # if running bash
+            if [ -n "$BASH_VERSION" ]; then
+                # include /opt/display/bin/display if it exists
+                if [ -f "/opt/display/bin/display" ]; then
+                    PATH="/opt/display/bin:$PATH"
+                fi
+            fi
+          state: "present"
     }
+galaxy_info:
+  author: your name
+  description: your description
+  company: your company (optional)
+...
 ```
 ## Testing
 
@@ -83,3 +101,5 @@ MIT / BSD
 ## Author Information
 
 This role was created in 2016 by [ALG](https://www.attestationlegale.fr)
+
+This role was modified in 2017 by 
