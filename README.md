@@ -46,26 +46,37 @@ None
 
 ```yaml
 ---
-# file: roles/shorewall/meta/main.yml
+# file: roles/display/meta/main.yml
 dependencies:
-  - { role: skel, 
-       skel_entries:
-        - path: /etc/skel/.ssh,
-          state: directory
+  - role: ensure_dirs
+    tags: ['minc', 'ensure_dirs']
+    ensure_dirs_on_remote: '{{ display_ensure_dirs_on_remote }}'
+    ensure_dirs_on_local : '{{ display_ensure_dirs_on_local }}'
 
-        - type: 'blockinfile'    
-          path: "/etc/skel/.bashrc"
-          insertafter: "EOF"
-          block: |
-            # if running bash
-            if [ -n "$BASH_VERSION" ]; then
-                # include /opt/display/bin/display if it exists
-                if [ -f "/opt/display/bin/display" ]; then
-                    PATH="/opt/display/bin:$PATH"
-                fi
-            fi
-          state: "present"
-    }
+  - role: skel
+    become: true
+    tags: ['minc', 'skel']
+    skel_entries:
+
+      - name: "meta/main.yml entry for /etc/skel/bin"
+        path  : '/etc/skel/bin'
+        user  : 'root'
+        group : 'root'
+        mode: '0755'
+        state: 'directory' # options are 'directory' or 'absent'
+
+      - name: 'template /etc/skel/bin/minc-toolkit-config.sh'
+        src:  'minc-toolkit-config.sh'
+        path: '/etc/skel/bin/minc-toolkit-config.sh'
+        mode: '0755'
+        state: 'template' # options are 'template' or 'absent'
+
+      - name:  'template /etc/skel/bin/minc-toolkit-conf-{{ minc_ver}}.sh'
+        src:   'versioned-minc-toolkit-config.sh'
+        path:  '/etc/skel/bin/minc-toolkit-config-{{ minc_ver }}.sh'
+        mode:  '0755'
+        state: 'template' # options are 'template' or 'absent'
+
 galaxy_info:
   author: your name
   description: your description
