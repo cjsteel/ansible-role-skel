@@ -44,7 +44,8 @@
     dest: "{{ item.path }}"
     owner: "{{ item.owner | default(skel_default_owner) }}"
     group: "{{ item.group | default(skel_default_group) }}"
-    mode: "{{ item.mode | default(skel_default_file_mode) }}"
+    mode : "{{ item.mode | default(skel_default_file_mode) }}"
+    force: "{{ item.force | default(skel_default_force) }}"
   when: item.state is defined and item.state == 'copy'
   with_flattened:
     - "{{ skel_entries }}"
