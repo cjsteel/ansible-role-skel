@@ -12,11 +12,30 @@ skel_default_link_force: False
 skel_default_link_mode: '0640'
 skel_default_link_state: 'link'
 
+#skel_bashrc_template       : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bashrc'
+#skel_bash_aliases_template : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bash_aliases'
+
+
+
 # blocinfile
 
 skel_default_blockinfile_marker: '<!-- {mark} ANSIBLE MANAGED BLOCK -->'
 skel_default_blockinfile_insertafter: "EOF" # or *regedit*, "<body>"
 
-skel_entries: []
+skel_entries:
+
+  - name: 'meta/main.yml entry for /etc/skel/.bashrc'
+    src: 'files/Ubuntu/16.04/etc/skel/.bashrc'
+    path: '/etc/skel/.bashrc'
+    mode: '0755'
+    state: 'copy'
+
+  - name: 'meta/main.yml entry for /etc/skel/.bash_aliases'
+    src: 'files/Ubuntu/16.04/etc/skel/.bash_aliases'
+    path: '/etc/skel/.bash_aliases'
+    mode: '0755'
+    state: 'copy'
+
+
 skel_group_entries: []
 skel_host_entries: []
