@@ -12,6 +12,10 @@ skel_default_link_force: False
 skel_default_link_mode: '0640'
 skel_default_link_state: 'link'
 
+skel_default_relative_link_mode: '0640'
+
+
+
 #skel_bashrc_template       : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bashrc'
 #skel_bash_aliases_template : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bash_aliases'
 
@@ -19,7 +23,7 @@ skel_default_link_state: 'link'
 
 # blocinfile
 
-skel_default_blockinfile_marker: '<!-- {mark} ANSIBLE MANAGED BLOCK -->'
+skel_default_blockinfile_marker: '# <!-- {mark} ANSIBLE MANAGED BLOCK -->'
 skel_default_blockinfile_insertafter: "EOF" # or *regedit*, "<body>"
 
 skel_entries:

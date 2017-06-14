@@ -9,13 +9,22 @@
 
     - skel_entries:
 
-      - path: "/etc/skel/.ssh"
+      - path: "/etc/skel/my_dir"
         mode: "0700"
         state: "directory"
+
+      - path: "/etc/skel/my_dir/test"
+        mode: "0700"
+        state: 'touch'
 
       - path: "/etc/skel/passwd"
         src: "/etc/passwd"
         state: "link"
+
+      - link_name: "my_relative_link"
+        link_target: "my_dir/test"
+        link_dir : "/etc/skel"
+        state: "relative_link"
 
       - path: "/etc/skel/foo"
         src: "./files/foo"

@@ -105,6 +105,26 @@ mkdir -p .vagrant/synced
 vagrant up
 ```
 
+### add user
+
+```shell
+sudo adduser --home /home/csteel -c "Christopher Steel" csteel
+```
+
+### confirm changes
+
+```shell
+sudo ls -al /etc/skel/
+```
+
+### remove user
+
+```shell
+sudo deluser --remove-home csteel
+```
+
+
+
 ## License
 
 MIT / BSD

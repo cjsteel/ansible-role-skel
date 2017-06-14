@@ -17,6 +17,22 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+# files
+
+- name: "Manage skels files using touch"
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    owner: "{{ item.owner | default(skel_default_owner) }}"
+    group: "{{ item.group | default(skel_default_group) }}"
+    mode: "{{ item.mode | default(skel_default_directory_mode) }}"
+  when: item.state is defined and item.state == 'touch'
+  with_flattened:
+    - "{{ skel_entries }}"
+    - "{{ skel_group_entries }}"
+    - "{{ skel_host_entries }}"
+  tags: [configuration,system,skel]
+
 ## copies
 
 - name: 'Manage skels files to copy'
@@ -85,4 +101,22 @@
     - "{{ skel_group_entries }}"
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
+
+# relative sym links
+
+- name: 'Manage skels links'
+  command: 'ln -frs {{ item.link_target }} {{ item.link_name }}'
+  args:
+    chdir  : '{{ item.link_dir }}'
+#    creates: '{{ item.link_dir }}/{{ item.link_name }}'
+  when: item.state is defined and item.state == 'relative_link'
+  with_flattened:
+    - "{{ skel_entries }}"
+    - "{{ skel_group_entries }}"
+    - "{{ skel_host_entries }}"
+  tags: [configuration,system,skel]
+
+
+
+
 
