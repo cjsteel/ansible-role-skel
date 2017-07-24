@@ -9,9 +9,9 @@ skel_default_file_mode: '0640'
 
 # git repo clones
 
-skel_default_clone: yes
-skel_default_clone_update : yes
-skel_default_clone_version: no # 0.0.1 # latest
+skel_default_clone: 'yes'
+skel_default_clone_update : 'yes'
+skel_default_clone_version: 'no' # 0.0.1 # latest
 
 
 skel_default_force: yes

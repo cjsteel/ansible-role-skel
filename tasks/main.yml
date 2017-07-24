@@ -23,9 +23,8 @@
   git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
-    version: "{{ item.version | default(skel_default_clone_version) }}"
     clone: "{{ item.clone | default(skel_default_clone) }}"
-  when: item.clone is defined and item.clone == 'yes'
+  when: item.clone is defined
   with_flattened:
     - "{{ skel_entries }}"
     - "{{ skel_group_entries }}"
