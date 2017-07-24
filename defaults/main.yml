@@ -6,6 +6,14 @@ skel_default_owner: 'root'
 skel_default_group: 'root'
 skel_default_directory_mode: '0750'
 skel_default_file_mode: '0640'
+
+# git repo clones
+
+skel_default_clone: yes
+skel_default_clone_update : yes
+skel_default_clone_version: no # 0.0.1 # latest
+
+
 skel_default_force: yes
 
 skel_default_link_force: False

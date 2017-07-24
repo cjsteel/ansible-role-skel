@@ -17,6 +17,21 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+# git repo clones
+
+- name: "Manage git repository clones"
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version | default(skel_default_clone_version) }}"
+    clone: "{{ item.clone | default(skel_default_clone) }}"
+  when: item.clone is defined and item.clone == 'yes'
+  with_flattened:
+    - "{{ skel_entries }}"
+    - "{{ skel_group_entries }}"
+    - "{{ skel_host_entries }}"
+  tags: [configuration,system,skel]
+
 # files
 
 - name: "Manage skels files using touch"
