@@ -1,6 +1,25 @@
 ---
 # Main tasks file for skel role
 
+# ensure for requirements
+
+## apt packages
+
+- name: "update apt cache"
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags: [ 'packages' ]
+
+- name: "Update apt cache and install myrepo reqirements package"
+  become: true
+  apt:
+    name : '{{ item }}'
+    state: 'present'
+  with_items:
+    - git
+
 # directories
 
 - name: 'Manage skels directories'
