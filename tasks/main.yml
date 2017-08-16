@@ -110,7 +110,7 @@
     marker: "{{ item.marker | default(skel_default_blockinfile_marker) }}"
     insertafter: "{{ item.insertafter | default(none) }}"
     block: "{{ item.block }}"
-    state: "{{ skel_blockinfile_state }}"
+    state: "{{ item.skel_blockinfile_state  | default(skel_default_blockinfile_state) }}"
   when: item.type is defined and item.type == 'blockinfile'
   with_flattened:
     - "{{ skel_entries }}"

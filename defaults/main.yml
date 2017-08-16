@@ -15,8 +15,7 @@ skel_default_clone_version: 'no' # 0.0.1 # latest
 
 # blockinfile
 
-skel_blockinfile_default_state: 'present'
-skel_blockinfile_state: '{{ skel_blockinfile_default_state }}'
+skel_default_blockinfile_state: 'present'
 
 # links
 
