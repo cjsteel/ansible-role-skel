@@ -13,6 +13,12 @@ skel_default_clone: 'yes'
 skel_default_clone_update : 'yes'
 skel_default_clone_version: 'no' # 0.0.1 # latest
 
+# blockinfile
+
+skel_blockinfile_default_state: 'present'
+skel_blockinfile_state: '{{ skel_blockinfile_default_state }}'
+
+# links
 
 skel_default_force: yes
 
