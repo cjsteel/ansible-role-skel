@@ -13,6 +13,11 @@
         mode: "0700"
         state: "directory"
 
+      - name : "git clone /etc/skel/bin/acemenu repository"
+        repo  : 'https://github.com/cjsteel/script-bash-acemenu.git'
+        dest  : '/etc/skel/my_dir/acemenu'
+        clone : yes
+
       - path: "/etc/skel/my_dir/test"
         mode: "0700"
         state: 'touch'
