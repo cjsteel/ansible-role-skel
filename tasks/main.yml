@@ -50,6 +50,21 @@
     - "{{ skel_host_entries }}"
   tags: [configuration,system,skel]
 
+# download from url
+
+## Gather minc-toolkit resources on remote system
+
+- name: "Download file at url"
+  get_url:
+    url: '{{ item.url }}'
+    dest: '{{ item.dest }}'
+  when: item.resource_type is defined and item.resource_type == 'url'
+  with_flattened:
+    - "{{ skel_entries }}"
+    - "{{ skel_group_entries }}"
+    - "{{ skel_host_entries }}"
+  tags: [ configuration, system, url ]
+
 # files
 
 - name: "Manage skels files using touch"

@@ -18,6 +18,12 @@
         dest  : '/etc/skel/my_dir/acemenu'
         clone : yes
 
+      - name         : "get file at url"
+        url          : 'https://downloads.sourceforge.net/project/brainworkshop/brainworkshop/Brain%20Workshop%204.8/brainworkshop-4.8.4.zip?r=&ts=1512181223&use_mirror=pilotfiber'
+        dest         : "/etc/skel/my_dir/."
+        mode         : "0770"
+        resource_type: 'url'
+
       - path: "/etc/skel/my_dir/test"
         mode: "0700"
         state: 'touch'
