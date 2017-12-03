@@ -13,15 +13,18 @@
         mode: "0700"
         state: "directory"
 
-      - name : "git clone /etc/skel/bin/acemenu repository"
-        repo  : 'https://github.com/cjsteel/script-bash-acemenu.git'
-        dest  : '/etc/skel/my_dir/acemenu'
-        clone : yes
+      - name: "git clone /etc/skel/bin/acemenu repository"
+        repo: 'https://github.com/cjsteel/script-bash-acemenu.git'
+        dest: '/etc/skel/my_dir/acemenu'
+        mode: '0770'
+        clone: yes
 
-      - name         : "get file at url"
-        url          : 'https://downloads.sourceforge.net/project/brainworkshop/brainworkshop/Brain%20Workshop%204.8/brainworkshop-4.8.4.zip?r=&ts=1512181223&use_mirror=pilotfiber'
-        dest         : "/etc/skel/my_dir/."
-        mode         : "0770"
+      - name: "Download master.zip"
+        url: 'https://github.com/cjsteel/script-bash-acemenu/archive/master.zip'
+        dest: '/etc/skel/my_dir/.'
+        mode: '0700'
+        checksum : 'sha256:89ae3a91a6fde5286d8d6c39650c6f213821b01c1633721789e3ea8a1fef020d'
+        force : yes
         resource_type: 'url'
 
       - path: "/etc/skel/my_dir/test"

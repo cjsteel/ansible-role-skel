@@ -27,12 +27,8 @@ skel_default_link_state: 'link'
 
 skel_default_relative_link_mode: '0640'
 
-
-
 #skel_bashrc_template       : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bashrc'
 #skel_bash_aliases_template : 'files/{{ ansible_distribution }}/{{ ansible_distribution_version }}/etc/skel/.bash_aliases'
-
-
 
 # blocinfile
 

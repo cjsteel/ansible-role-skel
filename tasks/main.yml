@@ -22,7 +22,7 @@
 
 # directories
 
-- name: 'Manage skels directories'
+- name: "Manage resource directories"
   file:
     path: "{{ item.path }}"
     state: "{{ item.state }}"
@@ -58,6 +58,11 @@
   get_url:
     url: '{{ item.url }}'
     dest: '{{ item.dest }}'
+    owner: '{{ item.owner | default(omit) }}'
+    group: '{{ item.group | default(omit) }}'
+    mode: '{{ item.mode  | default(omit) }}'
+    force: '{{ item.force  | default(omit) }}'
+    checksum : '{{ item.checksum | default(omit) }}'
   when: item.resource_type is defined and item.resource_type == 'url'
   with_flattened:
     - "{{ skel_entries }}"
