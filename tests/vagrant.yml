@@ -3,53 +3,85 @@
 - hosts: all
   remote_user: vagrant
   sudo: true
+  pre_tasks:
+
+    - set_fact: fact_controller_user="{{ lookup('env','USER') }}"
+    - set_fact: fact_controller_home="{{ lookup('env','HOME') }}"
+
+    - debug   : var=fact_controller_user
+    - debug   : var=fact_controller_home
+
   roles:
     - ../../
+
   vars:
 
     - skel_entries:
 
-      - path: "/etc/skel/my_dir"
-        mode: "0700"
-        state: "directory"
+      - path  : '/etc/skel/my_dir'
+        user  : 'root'
+        group : 'root'
+        mode  : '0700'
+        state : 'absent' #'directory'
 
       - name: "git clone /etc/skel/bin/acemenu repository"
-        repo: 'https://github.com/cjsteel/script-bash-acemenu.git'
-        dest: '/etc/skel/my_dir/acemenu'
-        mode: '0770'
-        clone: yes
+        repo  : 'https://github.com/cjsteel/script-bash-acemenu.git'
+        dest  : '/etc/skel/my_dir/acemenu'
+        user  : 'root'
+        group : 'root'
+        mode  : '0700'
+        clone : yes
 
       - name: "Download master.zip"
-        url: 'https://github.com/cjsteel/script-bash-acemenu/archive/master.zip'
-        dest: '/etc/skel/my_dir/.'
-        mode: '0700'
+        url      : 'https://github.com/cjsteel/script-bash-acemenu/archive/master.zip'
+        dest     : '/etc/skel/my_dir/.'
+        user     : 'root'
+        group    : 'root'
+        mode     : '0700'
         checksum : 'sha256:89ae3a91a6fde5286d8d6c39650c6f213821b01c1633721789e3ea8a1fef020d'
-        force : yes
+        force    : yes
         resource_type: 'url'
 
-      - path: "/etc/skel/my_dir/test"
-        mode: "0700"
-        state: 'touch'
+      - path  : '/etc/skel/my_dir/test'
+        user  : 'root'
+        group : 'root'
+        mode  : '0770'
+        state : 'absent' # 'touch'
 
-      - path: "/etc/skel/passwd"
-        src: "/etc/passwd"
-        state: "link"
+      - path  : '/etc/skel/passwd'
+        src   : '/etc/passwd'
+        user  : 'root'
+        group : 'root'
+        mode  : '0770'
+        state : 'absent' # 'link'
 
-      - link_name: "my_relative_link"
+      - link_name  : "my_relative_link"
         link_target: "my_dir/test"
-        link_dir : "/etc/skel"
-        state: "relative_link"
+        link_dir   : "/etc/skel"
+        user       : 'root'
+        group      : 'root'
+        mode       : '0750'
+        state      : 'relative_link'
 
-      - path: "/etc/skel/foo"
-        src: "./files/foo"
-        state: "copy"
+      - path : "/etc/skel/foo"
+        src  : "./files/foo"
+        user : 'root'
+        group: 'root'
+        mode : '0750'
+        state: 'absent' # 'copy'
 
-      - path: "/etc/skel/bar"
-        src: "./templates/bar.j2"
+      - path : "/etc/skel/bar"
+        src  : "./templates/bar.j2"
+        user : 'root'
+        group: 'root'
+        mode : '0770'
         state: "template"
 
-      - type: 'blockinfile'    
-        path: "/etc/skel/.bashrc"
+      - type : 'blockinfile'
+        user : 'root'
+        group: 'root'
+        mode : '0770'
+        path : "/etc/skel/.bashrc"
         insertafter: "EOF"
         block: |
           # if running bash

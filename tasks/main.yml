@@ -42,6 +42,8 @@
   git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
+    umask: '{{ item.umask  | default(omit) }}'
+    update: '{{ item.owner | default(skel_default_clone_update) }}'
     clone: "{{ item.clone | default(skel_default_clone) }}"
   when: item.clone is defined
   with_flattened:
