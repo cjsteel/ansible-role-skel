@@ -1,0 +1,17 @@
+#!/bin/bash
+#Displays current disk usage for the user's home directory & data drive.
+
+echo "
+# ====================================================
+#   REMAINING DISK SPACE LEFT ON YOUR HOME DIRECTORY
+# ====================================================
+"
+df -h /home/users
+
+echo "
+# ====================================================
+#     REMAINING DISK SPACE LEFT ON YOUR DATA DRIVE
+# ====================================================
+"
+df -h /data1
+echo
